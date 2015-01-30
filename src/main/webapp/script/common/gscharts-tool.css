@@ -1,0 +1,558 @@
+/*gswidget style*/
+.gswidget {
+    position: relative;
+    -moz-box-shadow: 2px 2px 10px rgba(3, 0, 5, 0.28);
+    -webkit-box-shadow: 2px 2px 10px rgba(3, 0, 5, 0.28);
+    box-shadow: 2px 2px 10px rgba(3, 0, 5, 0.28);
+    margin: 15px auto;
+}
+
+.gswidget .gswidget-tool{
+	position: absolute;
+    top: 5px;
+    right: 5px;
+    display: block;
+    z-index: 100;
+}
+
+.gswidget .gswidget-tool .gswidget-tool-btn{
+    border: none;
+    font-size: 16px;
+    padding: 3px 6px;
+    margin-right: 2px;
+}
+
+.fa-remove:before, .fa-close:before, .fa-times:before {
+    content: "\f00d";
+}
+
+.gswidget .gswidget-tool .gswidget-tool-btn .fa {
+
+}
+
+.gswidget .gswidget-config{
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	display: none;
+}
+
+.gswidget .gswidget-config .btn-group{
+	
+}
+
+.gswidget .gswidget-config.config-shown {
+	display: block;
+}
+
+.gswidget .gswidget-config .btn-group .btn-default{
+	padding : 3px 6px;
+	z-index: 100;
+    border-radius: 0 !important;
+}
+
+.gswidget .gswidget-config .btn-group > .btn:focus{
+    outline: 0;
+}
+
+.gswidget .gswidget-config .plotOptions{
+	margin-left: 3px;
+	display : none;
+}
+.gswidget .gswidget-config .plotOptions-shown{
+	display : inline-block;
+}
+
+@media screen and (max-width: 991px){
+    .gswidget .gswidget-config .btn-group .gscolumns{
+        height: 200px;
+        overflow-y:scroll;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .gswidget .gswidget-config .btn-group .gscolumns{
+        -moz-column-count:2; /* Firefox */
+        -webkit-column-count:2; /* Safari and Chrome */
+        column-count:2;
+        width: 300px;
+    }
+}
+
+.gswidget .gswidget-table {
+	display: none;
+	height: auto;
+	width: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 10px;
+	right: 10px;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.gswidget .gswidget-table .gswidget-table-container {
+	width: 100%;
+    height: 92%;
+    margin-top: 24px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.gswidget .gswidget-table .gswidget-table-container > table {
+
+}
+
+.gswidget .gswidget-table .table-scrollable {
+	margin: 0 !important;
+}
+
+.gswidget .gswidget-chart {
+	display: none;
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.gswidget .gswidget-chart.gswidget-subitem-shown , 
+.gswidget .gswidget-table.gswidget-subitem-shown {
+	display: block;
+}
+
+.gswidget .gswidget-chart .gswidget-chart-container {
+    width : 100%;
+	height: 100%;
+}
+
+/*customize-plot*/
+.customize-plot {
+   
+}
+
+.customize-plot h1, .customize-plot h2, .customize-plot h3, 
+.customize-plot h4, .customize-plot h5, .customize-plot h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300 !important;
+}
+
+.customize-plot .btn.blue {
+    color: white;
+    text-shadow: none;
+    background-color: #4d90fe;
+}
+
+@media (min-width: 992px) {
+	.customize-plot .modal-body {
+		height:420px;
+	}
+    .customize-plot .modal-lg {
+        width: 992px;
+    }
+    .customize-plot .modal-body-chart {
+		height:450px;
+	}
+}
+
+.customize-plot .modal-content {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+.customize-plot .modal-body .customize-plot-item {
+	margin-right: 0;
+	margin-left: 0;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px 4px 0 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.customize-plot .modal-body .customize-plot-item .droppable-item {
+	padding: 3px 5px 3px 5px;
+	margin: 3px 0 3px 5px;
+	position: relative;
+	color: #333;
+	cursor: default;
+	border: 1px solid #aaaaaa;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+	box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+	background-clip: padding-box;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-color: #e4e4e4;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
+	background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+	background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+	background-image: linear-gradient(to bottom, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+	float: left;
+}
+
+.customize-plot .modal-body .customize-plot-item .droppable-item .droppable-item-content {
+	margin-right: 5px;
+}
+
+.customize-plot .modal-body .customize-plot-item .droppable-item button {
+	float: none;
+}
+
+.customize-plot .modal-body .customize-plot-item .droppable-item .close {
+    display: inline-block;
+    margin-top: 0px;
+    margin-right: 0px;
+    width: 9px;
+    height: 9px;
+    background-repeat: no-repeat !important;
+    text-indent: -10000px;
+    outline: none;
+    background-image: url("img/remove-icon-small.png") !important;
+}
+
+.customize-plot .modal-body .customize-plot-item .ui-sortable-placeholder {
+	height: 0 !important;
+	border: none;
+	background: none;
+	padding: 0;
+	margin: 0;
+}
+
+.customize-plot .ui-draggable-dragging {
+	z-index: 10000;
+	padding: 3px 5px 3px 5px;
+	margin: 3px 0 3px 5px;
+	position: relative;
+	color: #333;
+	cursor: default;
+	border: 1px solid #aaaaaa;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+	box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+	background-clip: padding-box;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-color: #e4e4e4;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
+	background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+	background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+	background-image: linear-gradient(to bottom, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+}
+
+.customize-plot .modal-body .customize-plot-fields {
+	height: 260px;
+	overflow-y : auto;
+	overflow-x : hidden;
+	padding: 0 10px;
+}
+
+.customize-plot .modal-body .customize-plot-fields .customize-plot-field{
+	margin-top : 10px;
+	cursor: -webkit-grab;
+}
+
+.customize-plot .modal-body .customize-plot-xAxes {
+	height: 60px;
+}
+
+.customize-plot .modal-body .customize-plot-yAxes {
+	height: 62px;
+}
+
+.customize-plot .modal-body .customize-plot-series {
+	height: 60px;
+}
+
+.customize-plot .modal-body .customize-plot-chart {
+	height: 289px;
+	border: 1px solid #ddd;
+	margin-top: 10px;
+}
+
+.customize-plot .modal-body .customize-plot-draggableZone .alert-warning {
+	display: inline-block;
+    font-size: 14px;
+    margin-bottom: 0;
+    padding: 1px 1px 0 1px;
+    /* width: 69.5%; */
+}
+
+.customize-plot .modal-body .customize-plot-draggableZone .alert-warning .close {
+    margin-left: 5px;
+    right: 0px;
+    top: 0px;
+    position: relative;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+/*dialog css*/
+.modal-open {
+    padding-right: 0 !important;
+    overflow-y: auto !important;
+}
+
+#gscharts-customize-modal {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/*Metronic tab style*/
+.tabs-right > .nav-tabs,
+.tabs-left > .nav-tabs {
+  border-bottom: 0;
+}
+
+.tabs-left > .nav-tabs > li,
+.tabs-right > .nav-tabs > li {
+  float: none;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+  min-width: 74px;
+  margin-right: 0;
+  margin-bottom: 2px;
+  padding: 8px 15px;
+}
+
+.tabs-left > .nav-tabs {
+  float: left;
+  margin-right: 19px;
+  border-right: 1px solid #ddd;
+}
+
+.tabs-left > .tab-content {
+  padding-left: 127px;
+}
+
+.tabs-left > .tab-content .tab-pane-content .tab-pane-content-item a {
+    text-decoration:none;
+}
+
+.tabs-left > .tab-content .tab-pane-content .tab-pane-content-item a:hover {
+    text-decoration:none;
+}
+
+.tabs-left > .tab-content .tab-pane-content .tab-pane-content-item a > img{
+  height: 230px;
+  display: block;
+}
+
+@media (min-width: 992px) {
+	.tabs-left > .tab-content .tab-pane-content .tab-pane-content-item a > img{
+      height: 94px;
+      width: 100%;
+      display: block;
+    }
+}
+
+.tabs-left > .tab-content .tab-pane-content .tab-pane-content-item a > h3 {
+    margin: 8px 0;
+    color: #f0ad4e;
+}
+
+.tabs-left > .nav-tabs > li > a {
+    color: #555555;
+    margin-right: -1px;
+    -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+}
+
+.tabs-left > .nav-tabs > li > a:hover,
+.tabs-left > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+}
+
+.tabs-left > .nav-tabs .active > a,
+.tabs-left > .nav-tabs .active > a:hover,
+.tabs-left > .nav-tabs .active > a:focus {
+  border-color: #ddd transparent #ddd #ddd;
+  *border-right-color: #ffffff;
+}
+
+.tabs-right > .nav-tabs {
+  float: right;
+  margin-left: 19px;
+  border-left: 1px solid #ddd;
+}
+
+.tabs-right > .nav-tabs > li > a {
+  margin-left: -1px;
+  -webkit-border-radius: 0 4px 4px 0;
+     -moz-border-radius: 0 4px 4px 0;
+          border-radius: 0 4px 4px 0;
+}
+
+.tabs-right > .nav-tabs > li > a:hover,
+.tabs-right > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+}
+
+.tabs-right > .nav-tabs .active > a,
+.tabs-right > .nav-tabs .active > a:hover,
+.tabs-right > .nav-tabs .active > a:focus {
+  border-color: #ddd #ddd #ddd transparent;
+  *border-left-color: #ffffff;
+}
+
+.tabs-below > .nav-tabs,
+.tabs-below > .nav-pills {
+  border-bottom: 0;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+.tabs-below > .nav-tabs {
+  border-top: 1px solid #ddd;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+.tabs-below > .nav-tabs > li {
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+
+.tabs-below > .nav-tabs > li > a {
+  -webkit-border-radius: 0 0 4px 4px;
+     -moz-border-radius: 0 0 4px 4px;
+          border-radius: 0 0 4px 4px;
+}
+
+.tabs-below > .nav-tabs > li > a:hover,
+.tabs-below > .nav-tabs > li > a:focus {
+  border-top-color: #ddd;
+  border-bottom-color: transparent;
+}
+
+.tabs-below > .nav-tabs > .active > a,
+.tabs-below > .nav-tabs > .active > a:hover,
+.tabs-below > .nav-tabs > .active > a:focus {
+  border-color: transparent #ddd #ddd #ddd;
+}
+
+.tabbable:before,
+.tabbable:after {
+  display: table;
+  content: " ";
+}
+
+.tabbable:after {
+  clear: both;
+}
+
+.tabbable:before,
+.tabbable:after {
+  display: table;
+  content: " ";
+}
+
+.tabbable:after {
+  clear: both;
+}
+
+/***
+Custom portlet tabs
+***/
+.portlet-tabs > .nav-tabs {
+    position: relative;
+    top: -58px;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.portlet-tabs > .nav-tabs > li {
+    float: right;
+}
+
+.portlet-tabs > .nav-tabs {
+    border-bottom: none;
+}
+
+.portlet-tabs > .nav-tabs > li > a {
+  color: #555555;
+  padding-top: 8px;
+  padding-bottom: 10px;
+  line-height: 16px;
+  margin-top: 6px;
+  margin-left: 0px;
+  margin-right: 0px;
+   -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+            border-radius: 4px 4px 0 0;          
+}
+
+.portlet-tabs > .nav-tabs > li:last-child > a {
+
+}
+
+.portlet-tabs > .nav-tabs > li {
+  margin-left: 1px;
+}
+
+.portlet-tabs > .nav-tabs > li.active {
+  color: #333;
+  border-top-color: transparent;
+}
+
+.portlet-tabs > .nav-tabs > li.active > a {
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.portlet-tabs > .nav-tabs > li > a:hover {   
+  color: #333;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  border-color:transparent;
+  background-color: rgb(238, 238, 238);
+}  
+
+.portlet-tabs > .nav-tabs > .active > a  {
+  color: #555555;
+  cursor: default;
+  background-color: #fff;
+}
+
+.portlet-tabs > .nav-tabs > .active > a:hover {
+    background-color: #fff !important;
+    color: #555;
+    cursor: default;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+.portlet-tabs > .tab-content {
+  padding: 10px !important;
+  margin: 0px;
+  margin-top: -50px !important;
+}
+
+.portlet.tabbable .portlet-body {
+  padding: 0px;
+}
+
+.tab-pane > p:last-child {
+  margin-bottom: 0px;
+}
