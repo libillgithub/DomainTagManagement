@@ -48,8 +48,13 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore'], fu
                     },
                     {
                         'render': function (data, type, row) {
-                            return '<span class="label label-sm label-success tagLabel">' + data + '</span>';
+                            var tpl = [], dataArray = data.split(',');
+                            tpl = _.map(dataArray, function (value, index, list) {
+                                return '<h5 class="tagContainer"><span class="tagLabel">' + value + '</span><button type="button" class="close"></button></h5>';
+                            })
+                            return tpl.join('');// + '<h5 class="tagContainer"><button class="addNewTag"></button></h5>';
                         },
+                        // 'width' : '200px',
                         'targets': -1
                     }
                 ],
