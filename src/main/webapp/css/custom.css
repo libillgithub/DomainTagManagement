@@ -39,6 +39,7 @@ body {
   .main {
     padding-right: 40px;
     padding-left: 40px;
+    overflow-x: hidden;
   }
 }
 .main .page-header {
@@ -151,6 +152,10 @@ div.dataTables_length {
 	/* outline: thin dotted;
 	outline: 5px auto -webkit-focus-ring-color;
 	outline-offset: -2px; */
+}
+
+.main .popover-content {
+    padding: 9px 10px;
 }
 
 div.toolZone {

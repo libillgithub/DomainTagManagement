@@ -50,11 +50,11 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
                         'render': function (data, type, row) {
                             var tpl = [], dataArray = data.split(',');
                             tpl = _.map(dataArray, function (value, index, list) {
-                                return '<h5 class="tagContainer"><span class="tagLabel">' + value + '</span><button type="button" class="close tag-btn removeTag"></button></h5>';
+                                return '<h5 data-rowId="' + row[0] + '" class="tagContainer"><span class="tagLabel">' + value + '</span><button type="button" class="close tag-btn removeTag"></button></h5>';
                             })
-                            return tpl.join('') + '<h5 class="newTagContainer"><button class="tag-btn addNewTag"></button></h5>';
+                            return tpl.join('') + '<h5 data-rowId="' + row[0] + '" class="newTagContainer"><button class="tag-btn addNewTag"></button></h5>';
                         },
-                        'width' : '200px',
+                        'width' : '15%',
                         'targets': -1
                     }
                 ],
@@ -94,30 +94,50 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
 		
 		$('#mainZone').on('click', '.tag-btn', function (e) {
 			var $this = $(this);
+            // var selectedId = $this.closest('tr').find('.checkboxes').val();
+            var selectedId = $this.closest('h5').attr('data-rowId');
 			if ($this.hasClass('removeTag')) {
 				var selectedTag = $this.prev().html();
-				var selectedId = $this.closest('tr').find('.checkboxes').val();
-				console.log('selectedTag + selectedId = ' + selectedTag + ' & ' + selectedId);
-				$this.closest('.tagContainer').remove();
-				
-				//TODO: It need to send request.
+                $.ajax({
+                    type: 'get', //'post',
+                    url: _tagUrl,
+                    data: {
+                        'rowKeySeq' : selectedId,
+                        'tag' : selectedTag
+                    },
+                    dataType: 'json', //The json must be standard json object with double quotation marks
+                    success: function (data) {
+                        $this.closest('.tagContainer').remove();
+                    }
+                });
 			} else if ($this.hasClass('addNewTag')) {
 				$this.editable({
-					// mode : 'inline',
+                    // placement: 'left',
 					onblur : 'submit',
 					showbuttons : false,
 					toggle : 'manual',
 					highlight : false,
 					emptytext : '',
+                    display: false,
 					url : function (params) {
-						// parentNode.css('display', 'none');
-						targeNode.editable('destroy');
-						// $.post('init-dataset', params, function (data) {
-							// var date = new Date();
-							// data = {id : date.getTime(), name : 'Dashboard' + params.value};
-						// });
+                        var data = {
+                            'rowKeySeq' : selectedId,
+                            'newTag' : params.value
+                        };
+                        $.ajax({
+                            type: 'get', //'post',
+                            url: _tagUrl,
+                            data: data,
+                            dataType: 'json', //The json must be standard json object with double quotation marks
+                            success: function (data) {
+                                // if (data.result === 'Success') {
+                                   var tpl = '<h5 data-rowId="' + selectedId + '" class="tagContainer"><span class="tagLabel">' + params.value + '</span><button type="button" class="close tag-btn removeTag"></button></h5>';
+                                    $this.closest('.newTagContainer').before(tpl); 
+                                // }
+                            }
+                        });
 					}
-				}).editable('toggle');
+				}).editable('setValue', '').editable('toggle');
 			}
         });
 		
@@ -131,7 +151,7 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
 		});
 		
 		$('#tagForm .toolZone-btn').on('click', function (e) {
-			var tag = $('#tagForm .tag-input').val();
+			var tagContent = $('#tagForm .tag-input').val();
             //solution1: Use dataTable Api to get all the selected checkbox.
             var nodes = $('#listContainer').DataTable().column(0).nodes();
             var rowKeySeq = [];
@@ -141,35 +161,27 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
             
             if (rowKeySeq.length > 0) {
                 $.ajax({
-                    type: 'post',
+                    type: 'get', //'post',
                     url: _tagUrl,
                     data: {
-                        'newTag' : tag,
+                        'newTag' : tagContent,
                         'rowKeySeq' : rowKeySeq.join(',')
                     },
                     dataType: 'json', //The json must be standard json object with double quotation marks
                     success: function (data) {
-                        console.log(data);
-						//TODO: It need to update the selected row tag.
+                        var successRows = rowKeySeq;//data.rows;
+                        var tagNodes = $('#listContainer').DataTable().column(-1).nodes();
+                        // var newTagContainers = $('.newTagContainer', tagNodes);
+                        _.each(successRows, function (value, index, list) {
+                            var tpl = '<h5 data-rowId="' + value + '" class="tagContainer"><span class="tagLabel">' + tagContent + '</span><button type="button" class="close tag-btn removeTag"></button></h5>';
+                            $('.newTagContainer[data-rowId="' + value + '"]', tagNodes).before(tpl);
+                        });
                     }
                 });
             } else {
                 console.log('Please select some rows when you want to tag.');
             }
 		});
-		
-        /*
-        //solution1: Use dataTable Api to get all the selected checkbox.
-        var nodes = $('#listContainer').DataTable().column(0).nodes()
-        $(':checked', nodes).each(function (index) {console.log($(this).text())})
-        
-        //solution2: Use dataTable Api to get all the selected checkbox.
-        $('#listContainer').DataTable().column(0)
-        .nodes()
-        .each(function (value, index) {
-        	console.log('Data in index: ' + index + ' is: ' + value.innerHTML);
-        });
-        */
     }
     
     function _main() {
