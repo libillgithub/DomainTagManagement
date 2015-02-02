@@ -1,4 +1,4 @@
-define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore'], function () {
+define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bootstrap3-editable'], function () {
     var _listUrl = '/script/data/gsdata.json', _tagUrl = '/script/data/gsdata.json';
     var _datatablesCfg = {
         'searching' : false,
@@ -50,11 +50,11 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore'], fu
                         'render': function (data, type, row) {
                             var tpl = [], dataArray = data.split(',');
                             tpl = _.map(dataArray, function (value, index, list) {
-                                return '<h5 class="tagContainer"><span class="tagLabel">' + value + '</span><button type="button" class="close"></button></h5>';
+                                return '<h5 class="tagContainer"><span class="tagLabel">' + value + '</span><button type="button" class="close tag-btn removeTag"></button></h5>';
                             })
-                            return tpl.join('');// + '<h5 class="tagContainer"><button class="addNewTag"></button></h5>';
+                            return tpl.join('') + '<h5 class="newTagContainer"><button class="tag-btn addNewTag"></button></h5>';
                         },
-                        // 'width' : '200px',
+                        'width' : '200px',
                         'targets': -1
                     }
                 ],
@@ -92,6 +92,35 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore'], fu
             $('#mainZone table tbody .checkboxes').attr('checked', checked);
         });
 		
+		$('#mainZone').on('click', '.tag-btn', function (e) {
+			var $this = $(this);
+			if ($this.hasClass('removeTag')) {
+				var selectedTag = $this.prev().html();
+				var selectedId = $this.closest('tr').find('.checkboxes').val();
+				console.log('selectedTag + selectedId = ' + selectedTag + ' & ' + selectedId);
+				$this.closest('.tagContainer').remove();
+				
+				//TODO: It need to send request.
+			} else if ($this.hasClass('addNewTag')) {
+				$this.editable({
+					// mode : 'inline',
+					onblur : 'submit',
+					showbuttons : false,
+					toggle : 'manual',
+					highlight : false,
+					emptytext : '',
+					url : function (params) {
+						// parentNode.css('display', 'none');
+						targeNode.editable('destroy');
+						// $.post('init-dataset', params, function (data) {
+							// var date = new Date();
+							// data = {id : date.getTime(), name : 'Dashboard' + params.value};
+						// });
+					}
+				}).editable('toggle');
+			}
+        });
+		
 		$('#searchForm .toolZone-btn').on('click', function (e) {
 			var searchParams = $('#searchForm').serializeArray();
 			var params = {};
@@ -121,6 +150,7 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore'], fu
                     dataType: 'json', //The json must be standard json object with double quotation marks
                     success: function (data) {
                         console.log(data);
+						//TODO: It need to update the selected row tag.
                     }
                 });
             } else {

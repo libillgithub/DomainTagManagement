@@ -80,22 +80,13 @@ div.dataTables_length {
     position: relative;
     color: #fff;
     cursor: default;
-    /* border: 1px solid #aaaaaa; */
     border-radius: 0;
-    -webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-    /* box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05); */
-    /* background-clip: padding-box; */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     background-color: #3cc051;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
-    /* background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee)); */
-    /* background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%); */
-    /* background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%); */
-    /* background-image: linear-gradient(to bottom, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%); */
     float: left;
 }
 .main .tagContainer .tagLabel {
@@ -114,18 +105,52 @@ div.dataTables_length {
     background-image: url("../img/remove-icon-small.png") !important;
     float: none;
 }
+.main .newTagContainer {
+	padding: 2px 5px;
+    margin: 3px 0 3px 5px;
+    position: relative;
+    color: #fff;
+    cursor: default;
+    border-radius: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* float: right; */
+	float: left;
+}
 
-.main .tagContainer .addNewTag {
+.main .newTagContainer .addNewTag {
     display: inline-block;
-    margin-top: 0px;
-    margin-right: 0px;
-    width: 9px;
-    height: 9px;
-    background-repeat: no-repeat !important;
-    text-indent: -10000px;
-    outline: none;
-    background-image: url("../img/tag_orange_add.png") !important;
-    float: none;
+	margin-top: 0px;
+	margin-right: 0px;
+	width: 16px;
+	height: 16px;
+	background-repeat: no-repeat !important;
+	text-indent: -10000px;
+	outline: none;
+	background-image: url("../img/tag_orange_add.png") !important;
+	float: none;
+	touch-action: manipulation;
+	filter: alpha(opacity=70);
+	opacity: .7;
+	padding: 0;
+	cursor: pointer;
+	background: 0 0;
+	border: 0;
+}
+
+.main .newTagContainer .addNewTag:hover,  .main .newTagContainer .addNewTag:focus{
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+	filter: alpha(opacity=90);
+	opacity: .9;
+	
+	/* outline: thin dotted;
+	outline: 5px auto -webkit-focus-ring-color;
+	outline-offset: -2px; */
 }
 
 div.toolZone {

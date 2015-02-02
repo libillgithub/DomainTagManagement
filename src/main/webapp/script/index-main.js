@@ -9,6 +9,7 @@ require.config({
         'datatables': 'plugins/data-tables/jquery.dataTables.min',
         'dataTables-tableTools': 'plugins/data-tables/dataTables.tableTools.min',
         'DT_bootstrap': 'plugins/data-tables/DT_bootstrap',
+        'bootstrap3-editable': 'plugins/bootstrap3-editable/js/bootstrap-editable.min',
         'index': 'index-feature'
     },
     shim: {
@@ -17,7 +18,8 @@ require.config({
         'bootstrap': ['jquery'],
         'datatables': ['jquery'],
         'dataTables-tableTools': ['datatables'],
-        'DT_bootstrap': ['jquery', 'bootstrap', 'dataTables-tableTools']
+        'DT_bootstrap': ['jquery', 'bootstrap', 'dataTables-tableTools'],
+        'bootstrap3-editable': ['jquery', 'bootstrap']
     },
     priority: [
         'jquery'
