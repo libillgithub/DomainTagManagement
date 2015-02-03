@@ -1,5 +1,6 @@
 define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bootstrap3-editable'], function () {
     var _listUrl = '/script/data/gsdata.json', _tagUrl = '/script/data/gsdata.json';
+    var _datatables = null;
     var _datatablesCfg = {
         'searching' : false,
         'aLengthMenu': [10, 30, 50, 100, 200],
@@ -48,6 +49,13 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
                     },
                     {
                         'render': function (data, type, row) {
+                            return  '<span class="row-details row-details-close"></span>' + data;
+                        },
+                        'width' : '15%',
+                        'targets': 1
+                    },
+                    {
+                        'render': function (data, type, row) {
                             var tpl = [], dataArray = data.split(',');
                             tpl = _.map(dataArray, function (value, index, list) {
                                 return '<h5 data-rowId="' + row[0] + '" class="tagContainer"><span class="tagLabel">' + value + '</span><button type="button" class="close tag-btn removeTag"></button></h5>';
@@ -62,7 +70,7 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
                     $(thead).find('th').eq(0).css('width', '18px').html('<input type="checkbox" class="group-checkable" id="groupCheckbox"/>');
                 }
             });
-        $('table', $mainZone).dataTable(dtConfig);
+        _datatables = $('table', $mainZone).dataTable(dtConfig);
     }
     
     function _renderMainZone(params) {
@@ -140,7 +148,35 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
 				}).editable('setValue', '').editable('toggle');
 			}
         });
-		
+        
+        
+        /* Formatting function for row details */
+        function _fnFormatDetails(oTable, nTr) {
+            var aData = oTable.fnGetData(nTr);
+            var sOut = '<table>';
+            sOut += '<tr><td>Platform(s):</td><td>'+aData[2]+'</td></tr>';
+            sOut += '<tr><td>Engine version:</td><td>'+aData[3]+'</td></tr>';
+            sOut += '<tr><td>CSS grade:</td><td>'+aData[4]+'</td></tr>';
+            sOut += '<tr><td>Others:</td><td>Could provide a link here</td></tr>';
+            sOut += '</table>';
+             
+            return sOut;
+        }
+        
+        //Add event listener for opening and closing details
+        $('#mainZone').on('click', '#listContainer tbody tr td .row-details', function (e) {
+            var nTr = $(this).closest('tr');
+            if (_datatables.fnIsOpen(nTr)) {
+                $(this).addClass("row-details-close").removeClass("row-details-open");
+                _datatables.fnClose(nTr);
+            } else {            
+                $(this).addClass("row-details-open").removeClass("row-details-close");
+                // _datatables.fnOpen( nTr, _fnFormatDetails(_datatables, nTr), 'details' );
+                var rowData = _datatables.fnGetData(nTr);
+                _datatables.fnOpen(nTr, rowData[1] + '--' + rowData[rowData.length - 1], 'info_row');
+            }
+        });
+        
 		$('#searchForm .toolZone-btn').on('click', function (e) {
 			var searchParams = $('#searchForm').serializeArray();
 			var params = {};
