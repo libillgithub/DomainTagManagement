@@ -1,4 +1,4 @@
-define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bootstrap3-editable'], function () {
+define(['indexDetail', 'datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bootstrap3-editable'], function (indexDetail) {
     var _listUrl = '/script/data/gsdata.json', _tagUrl = '/script/data/gsdata.json';
     var _datatables = null;
     var _datatablesCfg = {
@@ -49,7 +49,8 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
                     },
                     {
                         'render': function (data, type, row) {
-                            return  '<span class="row-details row-details-close"></span>' + data;
+                            // return  '<span class="row-details row-details-close"></span>' + data;
+                            return data + '<span data-rowId="' + row[0] + '" class="row-details"><a href="javascript:void(0);"><i class="fa fa-ellipsis-horizontal"></i></a></span>';
                         },
                         'width' : '15%',
                         'targets': 1
@@ -57,6 +58,7 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
                     {
                         'render': function (data, type, row) {
                             var tpl = [], dataArray = data.split(',');
+                            dataArray = (data.length === 0) ? [] : dataArray; 
                             tpl = _.map(dataArray, function (value, index, list) {
                                 return '<h5 data-rowId="' + row[0] + '" class="tagContainer"><span class="tagLabel">' + value + '</span><button type="button" class="close tag-btn removeTag"></button></h5>';
                             })
@@ -149,20 +151,7 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
 			}
         });
         
-        
-        /* Formatting function for row details */
-        function _fnFormatDetails(oTable, nTr) {
-            var aData = oTable.fnGetData(nTr);
-            var sOut = '<table>';
-            sOut += '<tr><td>Platform(s):</td><td>'+aData[2]+'</td></tr>';
-            sOut += '<tr><td>Engine version:</td><td>'+aData[3]+'</td></tr>';
-            sOut += '<tr><td>CSS grade:</td><td>'+aData[4]+'</td></tr>';
-            sOut += '<tr><td>Others:</td><td>Could provide a link here</td></tr>';
-            sOut += '</table>';
-             
-            return sOut;
-        }
-        
+        /* 
         //Add event listener for opening and closing details
         $('#mainZone').on('click', '#listContainer tbody tr td .row-details', function (e) {
             var nTr = $(this).closest('tr');
@@ -176,7 +165,15 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
                 _datatables.fnOpen(nTr, rowData[1] + '--' + rowData[rowData.length - 1], 'info_row');
             }
         });
-        
+        */
+        //Add event listener for opening and closing details
+        $('#mainZone').on('click', '#listContainer tbody tr td .row-details', function (e) {
+            var $this = $(this);
+            var selectedId = $this.attr('data-rowId');
+            var selectedTr = $this.closest('tr');
+            indexDetail.show(selectedTr, _datatables);
+        });
+         
 		$('#searchForm .toolZone-btn').on('click', function (e) {
 			var searchParams = $('#searchForm').serializeArray();
 			var params = {};
@@ -197,8 +194,8 @@ define(['datatables', 'dataTables-tableTools', 'DT_bootstrap', 'underscore', 'bo
             
             if (rowKeySeq.length > 0) {
                 $.ajax({
-                    type: 'get', //'post',
-                    url: _tagUrl,
+                    type: 'post', //'post',
+                    url: 'http://10.139.1.242:8080/domain.tags/rest/domains/tag',//_tagUrl,
                     data: {
                         'newTag' : tagContent,
                         'rowKeySeq' : rowKeySeq.join(',')

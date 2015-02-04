@@ -75,7 +75,7 @@ div.dataTables_length {
     top: 15px;
 }
 
-.main .tagContainer {
+.tagContainer {
     padding: 3px 5px 3px 5px;
     margin: 3px 0 3px 5px;
     position: relative;
@@ -90,11 +90,11 @@ div.dataTables_length {
     background-color: #3cc051;
     float: left;
 }
-.main .tagContainer .tagLabel {
+.tagContainer .tagLabel {
     margin-right: 5px;
 }
 
-.main .tagContainer .close {
+.tagContainer .close {
     display: inline-block;
     margin-top: 0px;
     margin-right: 0px;
@@ -106,7 +106,8 @@ div.dataTables_length {
     background-image: url("../img/remove-icon-small.png") !important;
     float: none;
 }
-.main .newTagContainer {
+
+.newTagContainer {
 	padding: 2px 5px;
     margin: 3px 0 3px 5px;
     position: relative;
@@ -122,7 +123,7 @@ div.dataTables_length {
 	float: left;
 }
 
-.main .newTagContainer .addNewTag {
+.newTagContainer .addNewTag {
     display: inline-block;
 	margin-top: 0px;
 	margin-right: 0px;
@@ -142,7 +143,7 @@ div.dataTables_length {
 	border: 0;
 }
 
-.main .newTagContainer .addNewTag:hover,  .main .newTagContainer .addNewTag:focus{
+.newTagContainer .addNewTag:hover, .newTagContainer .addNewTag:focus{
 	color: #000;
 	text-decoration: none;
 	cursor: pointer;
@@ -164,7 +165,7 @@ div.dataTables_length {
   cursor: pointer;
   width: 14px;
   height: 14px;
-  margin-right: 5px;
+  margin: 0px 5px;
 }
 
 .dataTable .row-details.row-details-close {
@@ -206,3 +207,41 @@ div.toolZone {
 .toolZone-form.form-inline .form-group, .toolZone-form.form-inline .toolZone-btn{
 	margin-bottom: 10px;
 }
+
+/*modal css*/
+.modal-open {
+    padding-right: 0 !important;
+    overflow-y: auto !important;
+}
+
+.modal-open .btn.blue {
+    color: white;
+    text-shadow: none;
+    background-color: #4d90fe;
+}
+
+.subChannelModal .tableContainer {
+    margin-top : 10px;
+}
+
+.subChannelModal .editZone {
+    cursor: pointer;
+}
+
+/* .subChannelModal  .btn.green {
+    color: white;
+    text-shadow: none;
+    background-color: #35aa47;
+}
+
+.subChannelModal .btn.red {
+    color: white;
+    text-shadow: none;
+    background-color: #d84a38;
+}
+
+.subChannelModal .btn.purple {
+    color: white;
+    text-shadow: none;
+    background-color: #852b99;
+} */

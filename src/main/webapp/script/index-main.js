@@ -10,7 +10,8 @@ require.config({
         'dataTables-tableTools': 'plugins/data-tables/dataTables.tableTools.min',
         'DT_bootstrap': 'plugins/data-tables/DT_bootstrap',
         'bootstrap3-editable': 'plugins/bootstrap3-editable/js/bootstrap-editable.min',
-        'index': 'index-feature'
+        'index': 'index-feature',
+        'indexDetail': 'index-detail'
     },
     shim: {
         'jquery-migrate': ['jquery'],
